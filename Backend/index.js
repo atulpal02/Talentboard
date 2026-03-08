@@ -39,13 +39,21 @@ app.use("/api/application", applicationRoute);
 
 // ---- code for deployment ----
 
-if(process.env.NODE_ENV === "production"){
-  const dirpath = path.resolve();
-  app.use(express.static(( './frontend/dist')));
+// ---- code for deployment ----
+if (process.env.NODE_ENV === "production") {
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+
+  const frontendPath = path.join(__dirname, "../frontend/dist");
+
+  app.use(express.static(frontendPath));
+
   app.get("*", (req, res) => {
-    res.sendFile(path.resolve(dirpath, "./frontend/dist/index.html"));
+    res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
+
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 

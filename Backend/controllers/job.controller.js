@@ -1,5 +1,5 @@
 import { Job } from "../models/job.model.js";
-//Admin job posting
+
 export const postJob = async (req, res) => {
   try {
     const {
